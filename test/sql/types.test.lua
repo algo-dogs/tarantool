@@ -638,3 +638,24 @@ box.execute([[SELECT 1 % '2';]])
 box.execute([[SELECT 1 * '2';]])
 box.execute([[SELECT 1 / '2';]])
 box.execute([[SELECT 1 - '2';]])
+
+--
+-- Make sure there is no implicit string-to-number conversion in bitwise
+-- operations.
+--
+box.execute([[SELECT '1' | 2;]])
+box.execute([[SELECT '1' & 2;]])
+box.execute([[SELECT '1' << 2;]])
+box.execute([[SELECT '1' >> 2;]])
+box.execute([[SELECT ~'1';]])
+box.execute([[SELECT 1 | '2';]])
+box.execute([[SELECT 1 & '2';]])
+box.execute([[SELECT 1 << '2';]])
+box.execute([[SELECT 1 >> '2';]])
+
+-- Make sure that DOUBLE implicitly cast to INTEGER in bitwise operations.
+box.execute([[SELECT 3.5 | 1.3;]])
+box.execute([[SELECT 3.5 & 1.3;]])
+box.execute([[SELECT 3.5 << 1.3;]])
+box.execute([[SELECT 3.5 >> 1.3;]])
+box.execute([[SELECT ~3.5;]])
