@@ -185,6 +185,7 @@ else()
             --prefix=<INSTALL_DIR>
             --disable-shared
             --enable-static
+            --disable-minidebuginfo # to prevent linking with liblzma
         STEP_TARGETS download
     )
 endif()
